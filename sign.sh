@@ -1,13 +1,13 @@
 #!/bin/bash
 
-echo "Signing *.dylib files..."
-for file in $(find -name "*.dylib")
+for file in $(find -name "*.dylib" -not -path "./.git/*")
 do
-    ldid2 -S file
+	echo "Signing $file"
+    ldid2 -S "$file"
 done
 
-echo "Signing binaries..."
-for file in $(find . -type f ! -name "*.*")
+for file in $(find -type f ! -name "*.*" -not -path "./.git/*")
 do
-    ldid2 -S file
+	echo "Signing $file"
+    ldid2 -S "$file"
 done
